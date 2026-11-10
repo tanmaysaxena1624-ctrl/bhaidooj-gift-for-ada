@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#2b1833">
+  <title>For Ada ❤️ | Happy Bhai Dooj</title>
+  <style>
+    :root { --pink:#ffd7e5; --rose:#f5a9c5; --cream:#fff5f7; --gold:#f7d99a; }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body {
+      margin:0; min-height:100vh; color:var(--cream);
+      font-family: Georgia, 'Times New Roman', serif;
+      background:
+        radial-gradient(ellipse at 15% 10%, #8e527d88, transparent 42%),
+        radial-gradient(ellipse at 90% 85%, #a54e7180, transparent 40%),
+        linear-gradient(145deg,#21152d,#432440 55%,#29172f);
+      overflow-x:hidden;
+    }
+    .stars { position:fixed; inset:0; pointer-events:none; opacity:.45;
+      background-image:radial-gradient(#fff 1px,transparent 1px);
+      background-size:42px 42px; mask-image:linear-gradient(to bottom,black,transparent); }
+    .wrap { width:min(100% - 30px,720px); margin:auto; padding:42px 0 55px; position:relative; }
+    body.locked { overflow:hidden; }
+    body.locked .wrap { visibility:hidden; }
+    #lock-screen {
+      position:fixed; inset:0; z-index:20; display:none; align-items:center; justify-content:center;
+      padding:24px; text-align:center;
+      background:
+        radial-gradient(ellipse at 15% 10%, #8e527d88, transparent 42%),
+        radial-gradient(ellipse at 90% 85%, #a54e7180, transparent 40%),
+        linear-gradient(145deg,#21152d,#432440 55%,#29172f);
+    }
+    body.locked #lock-screen { display:flex; }
+    .lock-card { width:min(100%,440px); padding:34px 22px; border:1px solid #ffffff35;
+      border-radius:26px; background:#ffffff12; box-shadow:0 18px 55px #10081766; }
+    .lock-heart { font-size:54px; margin:14px 0; }
+    #countdown { display:flex; justify-content:center; gap:10px; margin:25px 0; }
+    .time-box { min-width:65px; padding:13px 8px; border-radius:14px; background:#ffffff16;
+      border:1px solid #ffffff25; }
+    .time-box strong { display:block; font: bold 25px Arial,sans-serif; color:var(--pink); }
+    .time-box span { display:block; margin-top:6px; font:10px Arial,sans-serif; color:#f7dce8; letter-spacing:1px; }
+    .hero, .letter, .memories, .ending {
+      border:1px solid #ffffff30; background:#ffffff0d; backdrop-filter:blur(12px);
+      border-radius:26px; box-shadow:0 18px 55px #10081755;
+    }
+    .hero { text-align:center; padding:42px 24px 38px; }
+    .eyebrow { color:var(--gold); letter-spacing:3px; text-transform:uppercase; font:12px Arial,sans-serif; }
+    .big-heart { font-size:58px; display:block; margin:14px 0; animation:pulse 1.8s infinite; }
+    h1 { font-size:clamp(39px,10vw,66px); margin:8px 0 12px; color:var(--pink); font-weight:normal; }
+    .subtitle { font-size:18px; line-height:1.7; color:#f9e7ef; max-width:510px; margin:0 auto; }
+    .btn {
+      display:inline-block; margin-top:27px; padding:14px 23px; border:0; border-radius:999px;
+      background:linear-gradient(135deg,#ffe5ee,#f3b2ca); color:#51283f;
+      font: bold 15px Arial,sans-serif; cursor:pointer; box-shadow:0 7px 24px #e78db755;
+      transition:transform .2s;
+    }
+    .btn:active { transform:scale(.96); }
+    section { margin-top:22px; }
+    .letter, .memories, .ending { padding:28px 25px; }
+    h2 { color:var(--gold); font-weight:normal; font-size:27px; text-align:center; margin:0 0 20px; }
+    .letter p { font-size:17px; line-height:1.95; color:#ffedf3; margin:0 0 14px; }
+    .signature { text-align:right; color:var(--pink); font-style:italic; font-size:19px; margin-top:22px; }
+    .memory-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+    .memory:nth-child(3) { grid-column:1 / -1; width:calc(50% - 6px); justify-self:center; }
+    .memory {
+      min-height:116px; padding:18px 13px; border-radius:18px; text-align:center;
+      background:#ffffff12; border:1px solid #ffffff20; display:flex; flex-direction:column;
+      justify-content:center; gap:9px; color:#ffedf3; line-height:1.5;
+    }
+    .memory span { font-size:27px; }
+    .ending { text-align:center; }
+    .ending p { font-size:17px; line-height:1.8; }
+    .final { font-size:27px; color:var(--pink); margin-top:20px; }
+    footer { text-align:center; color:#e9c9d9a8; font:12px Arial,sans-serif; padding:26px 0 0; }
+    #surprise { display:none; margin-top:23px; padding:20px; border-radius:18px; background:#ffffff12; animation:rise .8s ease; }
+    #surprise p { line-height:1.8; font-size:17px; }
+    .floating { position:fixed; bottom:-30px; font-size:20px; pointer-events:none; animation:floatUp 8s linear forwards; z-index:5; }
+    @keyframes pulse { 50% { transform:scale(1.13); } }
+    @keyframes rise { from { opacity:0; transform:translateY(15px); } to { opacity:1; transform:translateY(0); } }
+    @keyframes floatUp { to { transform:translateY(-110vh) rotate(25deg); opacity:0; } }
+    @media(max-width:430px) {
+      .wrap { width:min(100% - 22px,720px); padding-top:22px; }
+      .hero { padding:34px 18px; }
+      .letter,.memories,.ending { padding:24px 19px; }
+      .memory-grid { grid-template-columns:1fr 1fr; }
+      .letter p,.ending p { font-size:16px; }
+    }
+  </style>
+</head>
+<body class="locked">
+  <div id="lock-screen">
+    <div class="lock-card">
+      <div class="eyebrow">A surprise is waiting for you</div>
+      <div class="lock-heart">🎁❤️</div>
+      <h1 style="font-size:clamp(34px,9vw,48px)">Ada ke liye…</h1>
+      <p class="subtitle">Surprise abhi locked hai! 🥹<br>11 November ko raat 12:01 AM par khulega.</p>
+      <div id="countdown">
+        <div class="time-box"><strong id="days">00</strong><span>DAYS</span></div>
+        <div class="time-box"><strong id="hours">00</strong><span>HOURS</span></div>
+        <div class="time-box"><strong id="minutes">00</strong><span>MINUTES</span></div>
+        <div class="time-box"><strong id="seconds">00</strong><span>SECONDS</span></div>
+      </div>
+      <p style="color:#f7dce8;line-height:1.7">Thoda sa intezaar… tumhare bhai ne kuch special banaya hai. ❤️</p>
+    </div>
+  </div>
+  <div class="stars"></div>
+  <main class="wrap">
+    <header class="hero">
+      <div class="eyebrow">A little something from your brother</div>
+      <span class="big-heart">❤️</span>
+      <h1>Dear Ada</h1>
+      <p class="subtitle">Meri sabse pyaari behen ke naam…<br>Ek chhota sa surprise, dil ki gehraiyon se.</p>
+      <button class="btn" onclick="document.getElementById('letter').scrollIntoView({behavior:'smooth'})">Tumhare liye ek baat 💌</button>
+    </header>
+
+    <section class="letter" id="letter">
+      <h2>Jo shayad main keh nahi pata…</h2>
+      <p>Dear Ada,</p>
+      <p>Tum meri zindagi ki un sabse khaas logon mein se ho, jinke hone se mushkil waqt bhi thoda aasaan lagta hai.</p>
+      <p>Mere har dukh mein, har sukh mein, tumne mera saath diya. Jab kabhi cheezein achhi nahi thi, tab bhi tum mere saath khadi rahi. Shayad main har baar shukriya nahi keh pata, lekin tumhara saath mere liye bahut maayne rakhta hai.</p>
+      <p>Main perfect bhai nahi hoon, mujhse galtiyan bhi hoti hongi. Lekin ek baat hamesha sach rahegi — tum mere liye bahut special ho, aur main hamesha tumhari khushi chahta hoon.</p>
+      <p>Thank you meri baat sunne ke liye, mujhe samajhne ke liye, aur bina kisi shart ke mera saath dene ke liye.</p>
+      <div class="signature">Tumhara chhota/bada bhai ❤️</div>
+    </section>
+
+    <section class="memories">
+      <h2>Hamare rishte ki kuch baatein</h2>
+      <div class="memory-grid">
+        <div class="memory"><span>🫂</span>Har mushkil mein saath</div>
+        <div class="memory"><span>😂</span>Hansi aur masti</div>
+        <div class="memory"><span>🤍</span>Bina kahe samajhna</div>
+        <div class="memory"><span>🌷</span>Hamesha wali bonding</div>
+      </div>
+    </section>
+
+    <section class="ending">
+      <div class="eyebrow">For my forever favourite sister</div>
+      <h2 style="margin-top:12px">Happy Bhai Dooj, Ada! 🪔</h2>
+      <p>Duniya mein kitne bhi log mil jaayein, tumhari jagah koi nahi le sakta.</p>
+      <button class="btn" onclick="showSurprise()">Pehle pyaar, phir beizzati 😂</button>
+      <div id="surprise">
+        <p><strong>Ada, I love you so much! ❤️</strong></p>
+        <p>Bas hamesha khush rehna. Aur yaad rakhna, tumhara bhai tumhare saath hai — aaj bhi, kal bhi, hamesha.</p>
+        <div style="font-size:30px">🫂💗🪔</div>
+      </div>
+    </section>
+
+    <section class="memories" style="text-align:center">
+      <div class="eyebrow">Ab thodi sachchai bhi sun lo 😭</div>
+      <h2 style="margin-top:12px">Ada ki beizzati department 😂</h2>
+      <div class="memory-grid">
+        <div class="memory"><span>👑</span>Madam ko lagta hai poori duniya inke ishaaron pe chalti hai.</div>
+        <div class="memory"><span>🙄</span>Attitude itna jaise ghar ki nahi, desh ki PM ho.</div>
+                <div class="memory"><span>🤡</span>Drama karne mein Oscar bhi tumse training le.</div>
+      </div>
+      <p style="line-height:1.8;margin:20px 0 0;color:#ffedf3">
+        Lekin kya karein… itni irritating hone ke baad bhi tum meri favourite behen ho. 😭❤️
+      </p>
+    </section>
+
+    <section class="ending" style="text-align:center">
+      <h2>Ek aakhri baat, Ada… 😂</h2>
+      <p>Itna emotional message padh liya? Ab zyada hawa mein mat udna. Gift samajh ke website de di, warna tere nakhre ka subscription alag se lena padta! 🤣</p>
+      <div class="final">Gu kha ab 😂❤️</div>
+      <p style="margin-top:12px;font-size:14px;color:#f3cada">Happy Bhai Dooj, chudail 😂❤️</p>
+    </section>
+
+    <footer>Made with love, just for Ada ❤️</footer>
+  </main>
+
+  <script>
+    // Fixed unlock time: 11 November 2026, 12:01 AM (India Standard Time).
+    // The deadline is fixed, so refreshing the page does not restart the countdown.
+    const unlockAt = new Date('2026-11-11T00:01:00+05:30').getTime();
+
+    function updateCountdown() {
+      const remaining = unlockAt - Date.now();
+      if (remaining <= 0) {
+        document.body.classList.remove('locked');
+        const lockScreen = document.getElementById('lock-screen');
+        if (lockScreen) lockScreen.remove();
+        return;
+      }
+
+      const days = Math.floor(remaining / 86400000);
+      const hours = Math.floor((remaining % 86400000) / 3600000);
+      const minutes = Math.floor((remaining % 3600000) / 60000);
+      const seconds = Math.floor((remaining % 60000) / 1000);
+
+      document.getElementById('days').textContent = String(days).padStart(2, '0');
+      document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+      document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+      document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+    }
+
+    updateCountdown();
+    const countdownTimer = setInterval(() => {
+      updateCountdown();
+      if (Date.now() >= unlockAt) clearInterval(countdownTimer);
+    }, 1000);
+
+    function showSurprise() {
+      const surprise = document.getElementById('surprise');
+      surprise.style.display = 'block';
+      surprise.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      for (let i = 0; i < 18; i++) {
+        const heart = document.createElement('div');
+        heart.className = 'floating';
+        heart.textContent = ['❤️','💗','✨','🌸'][Math.floor(Math.random()*4)];
+        heart.style.left = Math.random()*100 + 'vw';
+        heart.style.animationDuration = (5 + Math.random()*4) + 's';
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 9000);
+      }
+    }
+  </script>
+</body>
+</html>
